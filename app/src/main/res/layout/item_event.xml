@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_place"
+        android:id="@+id/iv_event"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="16dp"
@@ -16,19 +16,18 @@
         tools:srcCompat="@drawable/dog" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_event_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Гуляем с собачками"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_place"
+        app:layout_constraintStart_toEndOf="@+id/iv_event"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton"
+        android:id="@+id/btn_event_sign_up"
         android:layout_width="115dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
@@ -36,34 +35,32 @@
         android:text="Записаться"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_event_name" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_event_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textSize="10sp"
-        android:text="ул. Уральская, 89"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_place"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_event"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_place"
-        app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+        app:layout_constraintStart_toEndOf="@+id/iv_event"
+        app:layout_constraintTop_toBottomOf="@+id/btn_event_sign_up" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_people_num"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Кол-во людей: 5/5"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toStartOf="@+id/materialButton"
-        app:layout_constraintStart_toEndOf="@+id/iv_place"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintBottom_toTopOf="@+id/tv_event_address"
+        app:layout_constraintEnd_toStartOf="@+id/btn_event_sign_up"
+        app:layout_constraintStart_toEndOf="@+id/iv_event"
+        app:layout_constraintTop_toBottomOf="@+id/tv_event_name" />
 
     <View
         android:id="@+id/view"
