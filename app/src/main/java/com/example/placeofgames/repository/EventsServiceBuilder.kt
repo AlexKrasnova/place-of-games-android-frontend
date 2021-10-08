@@ -14,7 +14,7 @@ object EventsServiceBuilder {
         .client(client)
         .build()
 
-    public fun<T> buildService(service: Class<T>): T{
+    fun<T> buildService(service: Class<T>): T{
         return retrofit.create(service)
     }
 }
