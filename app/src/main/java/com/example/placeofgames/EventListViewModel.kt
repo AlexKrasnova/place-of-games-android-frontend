@@ -22,13 +22,15 @@ class EventListViewModel : ViewModel() {
         return events
     }
 
-    private fun loadEvents() {
-//        events.value = listOf(Event(1, "Some name", Date(), 60, Place(1, "Center", "ul.Tokarey, h. 893"), 100, 5))
+    fun incEventPeople(eventId: Int){
+        eventsApiService.incEventPeople(eventId)
+    }
+
+    fun loadEvents() {
         eventsApiService.getEvents {
             if (it != null) {
                 events.value = it
             }
-
         }
     }
 }

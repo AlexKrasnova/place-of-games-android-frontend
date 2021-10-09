@@ -14,5 +14,5 @@ interface EventsApi {
     fun addParticipant(
         @Path("id")
         eventId: Int
-    ): Call<Event>
+    ): Call<Void>
 }
