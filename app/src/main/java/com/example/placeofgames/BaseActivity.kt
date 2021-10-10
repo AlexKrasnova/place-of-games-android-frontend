@@ -5,14 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.progressindicator.LinearProgressIndicator
 
 abstract class BaseActivity : AppCompatActivity(){
-    private lateinit var progressBar: LinearProgressIndicator
+//    private lateinit var progressBar: LinearProgressIndicator
 
     override fun setContentView(layoutResID: Int) {
         super.setContentView(layoutResID)
-        progressBar = findViewById(R.id.progress_bar)
+//        progressBar = findViewById(R.id.progress_bar)
     }
 
     open fun showProgressBar(visibility: Boolean) {
-        progressBar.visibility = if (visibility) View.VISIBLE else View.GONE
+//        progressBar.visibility = if (visibility) View.VISIBLE else View.GONE
     }
 }
