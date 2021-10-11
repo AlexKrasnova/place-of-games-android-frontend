@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +27,13 @@ class MainActivity : BaseActivity() {
 
         navController = navHostFragment.navController
         bottomNav.setupWithNavController(navController)
+        NavigationUI.setupWithNavController(bottomNav, navController)
 
+        bottomNav.setOnItemReselectedListener {
+            when(it.itemId){
+                R.id.games -> navController.navigateUp()
+            }
+        }
     }
 
     private fun initViews(){

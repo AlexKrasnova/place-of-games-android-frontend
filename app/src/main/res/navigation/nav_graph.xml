@@ -24,5 +24,9 @@
         android:id="@+id/eventDescFragment"
         android:name="com.example.placeofgames.EventDescFragment"
         android:label="EventDescFragment"
-        tools:layout="@layout/fragment_event_desc" />
+        tools:layout="@layout/fragment_event_desc" >
+        <action
+            android:id="@+id/action_eventDescFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
+    </fragment>
 </navigation>

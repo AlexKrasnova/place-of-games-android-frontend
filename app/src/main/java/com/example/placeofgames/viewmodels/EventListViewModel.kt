@@ -10,18 +10,25 @@ class EventListViewModel : ViewModel() {
 
     private val eventsApiService = EventsService()
 
-    private val events: MutableLiveData<List<Event>> by lazy {
-        MutableLiveData<List<Event>>().also {
+    private val events: MutableLiveData<MutableList<Event>> by lazy {
+        MutableLiveData<MutableList<Event>>().also {
             loadEvents()
         }
     }
 
-    fun getEvents(): LiveData<List<Event>> {
+    fun getEvents(): LiveData<MutableList<Event>> {
         return events
     }
 
     fun incEventPeople(eventId: Int){
-        eventsApiService.incEventPeople(eventId)
+        eventsApiService.incEventPeople(eventId) {
+            val changedEvent = events.value?.indexOf(events.value?.find { it.id == eventId })
+            if (changedEvent != null) {
+                val list = events.value
+                list?.set(changedEvent, it!!)
+                events.value = list
+            }
+        }
     }
 
     fun loadEvents() {
