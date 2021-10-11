@@ -1,18 +1,19 @@
 package com.example.placeofgames
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.placeofgames.data.Event
+import com.example.placeofgames.viewmodels.EventListViewModel
 
-class EventsFragment : Fragment(), EventsAdapter.OnSignUpClickListener{
+class EventsFragment : Fragment(), EventsAdapter.EventClickListener{
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
@@ -51,5 +52,11 @@ class EventsFragment : Fragment(), EventsAdapter.OnSignUpClickListener{
 
     override fun onClickSignUp(v: View, eventId: Int) {
         eventsViewModel.incEventPeople(eventId)
+    }
+
+    override fun onClickItem(v: View, event: Event) {
+        val bundle = Bundle()
+        bundle.putParcelable("event", event)
+        findNavController().navigate(R.id.eventDescFragment, bundle)
     }
 }

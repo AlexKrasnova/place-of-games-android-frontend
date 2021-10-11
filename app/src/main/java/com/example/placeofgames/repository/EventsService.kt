@@ -33,6 +33,27 @@ class EventsService {
         )
     }
 
+    fun getEvent(eventId: Int, onResult: (Event?) -> Unit){
+        retrofit.getEvent(eventId).enqueue(
+            object : Callback<Event> {
+                override fun onFailure(call: Call<Event>, t: Throwable) {
+                    onResult(null)
+                    Log.d(LOG, t.message!!)
+                }
+
+                override fun onResponse(
+                    call: Call<Event>,
+                    response: Response<Event>
+                ) {
+                    Log.d(LOG, "response ok")
+                    val event = response.body()
+                    Log.d(LOG, event.toString())
+                    onResult(event)
+                }
+            }
+        )
+    }
+
     fun incEventPeople(eventId: Int){
         retrofit.addParticipant(eventId).enqueue(
             object : Callback<Void> {

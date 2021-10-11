@@ -15,4 +15,10 @@ interface EventsApi {
         @Path("id")
         eventId: Int
     ): Call<Void>
+
+    @GET("api/v1/events/{id}")
+    fun getEvent(
+        @Path("id")
+        eventId: Int
+    ): Call<Event>
 }

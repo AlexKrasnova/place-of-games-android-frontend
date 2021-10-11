@@ -1,12 +1,10 @@
-package com.example.placeofgames
+package com.example.placeofgames.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.placeofgames.data.Event
-import com.example.placeofgames.data.Place
 import com.example.placeofgames.repository.EventsService
-import java.util.*
 
 class EventListViewModel : ViewModel() {
 
