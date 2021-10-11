@@ -16,17 +16,20 @@ class EventListViewModel : ViewModel() {
         }
     }
 
+    private val updatedEvent: MutableLiveData<Event> = MutableLiveData()
+
     fun getEvents(): LiveData<MutableList<Event>> {
         return events
     }
 
+    fun getUpdatedEvent(): LiveData<Event>{
+        return updatedEvent
+    }
+
     fun incEventPeople(eventId: Int){
         eventsApiService.incEventPeople(eventId) {
-            val changedEvent = events.value?.indexOf(events.value?.find { it.id == eventId })
-            if (changedEvent != null) {
-                val list = events.value
-                list?.set(changedEvent, it!!)
-                events.value = list
+            if (it != null){
+                updatedEvent.value = it
             }
         }
     }

@@ -35,6 +35,10 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener{
             eventsViewModel.loadEvents()
         }
 
+        eventsViewModel.getUpdatedEvent().observe(viewLifecycleOwner, {event ->
+            (recyclerView.adapter as EventsAdapter).updateEvent(event)
+        })
+
         return view
     }
 

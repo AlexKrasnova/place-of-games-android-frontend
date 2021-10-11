@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.placeofgames.data.Event
 import com.google.android.material.button.MaterialButton
 
-class EventsAdapter(private val data: List<Event>, private val eventClickListener: EventClickListener) : RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
+class EventsAdapter(private val data: MutableList<Event>, private val eventClickListener: EventClickListener) : RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val iv: ImageView = view.findViewById(R.id.iv_event)
@@ -48,6 +48,12 @@ class EventsAdapter(private val data: List<Event>, private val eventClickListene
 
     override fun getItemCount(): Int {
         return data.size
+    }
+
+    fun updateEvent(updatedEvent: Event){
+        val updateIndex = data.indexOfFirst { event ->  event.id == updatedEvent.id}
+        data[updateIndex] = updatedEvent
+        notifyItemChanged(updateIndex)
     }
 
     interface EventClickListener{
