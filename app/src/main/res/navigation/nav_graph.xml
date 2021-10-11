@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/eventsFragment">
+
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.example.placeofgames.EventsFragment"
+        android:label="EventsFragment"
+        tools:layout="@layout/fragment_events">
+        <action
+            android:id="@+id/action_to_event_desc"
+            app:destination="@id/eventDescFragment">
+            <argument
+                android:name="eventId"
+                android:defaultValue="-1"
+                app:argType="integer" />
+        </action>
+
+    </fragment>
+    <fragment
+        android:id="@+id/eventDescFragment"
+        android:name="com.example.placeofgames.EventDescFragment"
+        android:label="EventDescFragment"
+        tools:layout="@layout/fragment_event_desc" />
+</navigation>

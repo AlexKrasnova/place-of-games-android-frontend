@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PlaceOfGames</string>
+    <string name="games">Игры</string>
+    <string name="places">Площадки</string>
 </resources>
