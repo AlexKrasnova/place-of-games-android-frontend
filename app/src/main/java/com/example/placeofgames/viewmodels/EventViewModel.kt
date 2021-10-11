@@ -17,7 +17,9 @@ class EventViewModel : ViewModel() {
     }
 
     fun incEventPeople(eventId: Int){
-        eventsApiService.incEventPeople(eventId)
+        eventsApiService.incEventPeople(eventId) {
+            event.value = it
+        }
     }
 
     private fun loadEvent(eventId: Int) {

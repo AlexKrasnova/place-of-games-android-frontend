@@ -6,16 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.placeofgames.data.Event
 import com.example.placeofgames.viewmodels.EventViewModel
+import com.google.android.material.button.MaterialButton
 import java.util.*
 
 class EventDescFragment : Fragment() {
 
-    private var event: Event? = null
+    private lateinit var event: Event
     private val eventViewModel: EventViewModel by viewModels()
 
     private lateinit var tvEventName: TextView
@@ -26,6 +29,8 @@ class EventDescFragment : Fragment() {
     private lateinit var tvAddress: TextView
     private lateinit var tvPeopleNum: TextView
     private lateinit var tvDesc: TextView
+    private lateinit var btnBack: AppCompatImageButton
+    private lateinit var btnEventSignUp: MaterialButton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,24 +38,30 @@ class EventDescFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_event_desc, container, false)
-        event = requireArguments().getParcelable("event")
+        event = requireArguments().getParcelable("event")!!
         initViews(view)
 
-        if (event != null) {
-            setEventToViews(event!!)
-        }
+        setEventToViews(event)
 
-        event?.id?.let {
+        event.id.let {
             eventViewModel.getEventLiveData(it).observe(viewLifecycleOwner, { event ->
 
-                if (this.event == null) {
-                    setEventToViews(event)
-                } else if (this.event!! != event) {
+                if (this.event != event) {
+                    this.event = event
                     setEventToViews(event)
                 }
 
             })
         }
+
+        btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        btnEventSignUp.setOnClickListener {
+            eventViewModel.incEventPeople(event.id)
+        }
+
         return view
     }
 
@@ -77,5 +88,7 @@ class EventDescFragment : Fragment() {
         tvAddress = view.findViewById(R.id.tv_address)
         tvPeopleNum = view.findViewById(R.id.tv_people_num)
         tvDesc = view.findViewById(R.id.tv_desc)
+        btnBack = view.findViewById(R.id.btn_back)
+        btnEventSignUp = view.findViewById(R.id.btn_event_sign_up)
     }
 }
