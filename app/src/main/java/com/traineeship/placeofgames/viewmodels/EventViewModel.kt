@@ -1,10 +1,10 @@
-package com.example.placeofgames.viewmodels
+package com.traineeship.placeofgames.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.placeofgames.data.Event
-import com.example.placeofgames.repository.EventsService
+import com.traineeship.placeofgames.data.Event
+import com.traineeship.placeofgames.repository.EventsService
 
 class EventViewModel : ViewModel() {
     private val eventsApiService = EventsService()

@@ -1,4 +1,4 @@
-package com.example.placeofgames
+package com.traineeship.placeofgames
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.placeofgames.data.Event
-import com.example.placeofgames.viewmodels.EventViewModel
+import com.example.placeofgames.R
+import com.traineeship.placeofgames.data.Event
+import com.traineeship.placeofgames.viewmodels.EventViewModel
 import com.google.android.material.button.MaterialButton
 import java.util.*
 

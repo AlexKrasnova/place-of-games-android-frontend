@@ -1,4 +1,4 @@
-package com.example.placeofgames.data
+package com.traineeship.placeofgames.data
 
 import android.os.Parcel
 import android.os.Parcelable

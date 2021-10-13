@@ -1,4 +1,4 @@
-package com.example.placeofgames
+package com.traineeship.placeofgames
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.placeofgames.data.Event
-import com.example.placeofgames.viewmodels.EventListViewModel
+import com.example.placeofgames.R
+import com.traineeship.placeofgames.data.Event
+import com.traineeship.placeofgames.viewmodels.EventListViewModel
 
-class EventsFragment : Fragment(), EventsAdapter.EventClickListener{
+class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout

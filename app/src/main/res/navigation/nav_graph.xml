@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/eventsFragment"
-        android:name="com.example.placeofgames.EventsFragment"
+        android:name="com.traineeship.placeofgames.EventsFragment"
         android:label="EventsFragment"
         tools:layout="@layout/fragment_events">
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/eventDescFragment"
-        android:name="com.example.placeofgames.EventDescFragment"
+        android:name="com.traineeship.placeofgames.EventDescFragment"
         android:label="EventDescFragment"
         tools:layout="@layout/fragment_event_desc" >
         <action

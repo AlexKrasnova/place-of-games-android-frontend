@@ -1,6 +1,6 @@
-package com.example.placeofgames.repository
+package com.traineeship.placeofgames.repository
 
-import com.example.placeofgames.data.Event
+import com.traineeship.placeofgames.data.Event
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.POST

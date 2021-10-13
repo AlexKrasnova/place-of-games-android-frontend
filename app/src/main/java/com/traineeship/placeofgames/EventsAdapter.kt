@@ -1,4 +1,4 @@
-package com.example.placeofgames
+package com.traineeship.placeofgames
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.placeofgames.data.Event
+import com.example.placeofgames.R
+import com.traineeship.placeofgames.data.Event
 import com.google.android.material.button.MaterialButton
 
 class EventsAdapter(private val data: MutableList<Event>, private val eventClickListener: EventClickListener) : RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
@@ -33,7 +34,8 @@ class EventsAdapter(private val data: MutableList<Event>, private val eventClick
         val event = data[position]
 
         //todo refactor
-        holder.iv.setImageDrawable(ResourcesCompat.getDrawable(holder.itemView.resources, R.drawable.dog, holder.itemView.context.theme))
+        holder.iv.setImageDrawable(ResourcesCompat.getDrawable(holder.itemView.resources,
+            R.drawable.dog, holder.itemView.context.theme))
 
         holder.tvName.text = event.name
         holder.tvAddress.text = event.place?.address

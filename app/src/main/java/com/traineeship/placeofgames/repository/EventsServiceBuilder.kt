@@ -1,4 +1,4 @@
-package com.example.placeofgames.repository
+package com.traineeship.placeofgames.repository
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

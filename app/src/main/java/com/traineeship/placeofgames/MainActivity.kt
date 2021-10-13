@@ -1,4 +1,4 @@
-package com.example.placeofgames
+package com.traineeship.placeofgames
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,8 +9,9 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.placeofgames.data.Event
-import com.example.placeofgames.data.Place
+import com.example.placeofgames.R
+import com.traineeship.placeofgames.data.Event
+import com.traineeship.placeofgames.data.Place
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 
