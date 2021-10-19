@@ -14,6 +14,7 @@ import com.example.placeofgames.R
 import com.traineeship.placeofgames.data.Event
 import com.traineeship.placeofgames.viewmodels.EventListViewModel
 
+
 class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
 
     private lateinit var recyclerView: RecyclerView
@@ -28,6 +29,7 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
         val view = inflater.inflate(R.layout.fragment_events, container, false)
 
         initViews(view)
+
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = EventsAdapter(mutableListOf(), this)
         getEvents()
@@ -36,7 +38,7 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
             eventsViewModel.loadEvents()
         }
 
-        eventsViewModel.getUpdatedEvent().observe(viewLifecycleOwner, {event ->
+        eventsViewModel.getUpdatedEvent().observe(viewLifecycleOwner, { event ->
             (recyclerView.adapter as EventsAdapter).updateEvent(event)
         })
 

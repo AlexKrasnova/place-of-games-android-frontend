@@ -9,13 +9,14 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.placeofgames.R
-import com.traineeship.placeofgames.data.Event
-import com.traineeship.placeofgames.viewmodels.EventViewModel
 import com.google.android.material.button.MaterialButton
-import java.util.*
+import com.traineeship.placeofgames.data.Event
+import com.traineeship.placeofgames.data.Token
+import com.traineeship.placeofgames.utils.TokenUtil
+import com.traineeship.placeofgames.viewmodels.EventViewModel
 
 class EventDescFragment : Fragment() {
 
@@ -40,6 +41,7 @@ class EventDescFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_event_desc, container, false)
         event = requireArguments().getParcelable("event")!!
+
         initViews(view)
 
         setEventToViews(event)

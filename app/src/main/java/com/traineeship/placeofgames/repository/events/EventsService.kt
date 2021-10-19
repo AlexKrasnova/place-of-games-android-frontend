@@ -1,32 +1,37 @@
-package com.traineeship.placeofgames.repository
+package com.traineeship.placeofgames.repository.events
 
 import android.util.Log
 import com.traineeship.placeofgames.data.Event
+import com.traineeship.placeofgames.data.Token
+import com.traineeship.placeofgames.repository.ServiceBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 
-class EventsService {
+class EventsService(token: String) {
 
-    private val LOG = "EVENTS_SERVICE"
-    private val retrofit = EventsServiceBuilder.buildService(EventsApi::class.java)
+    companion object {
+        const val TAG = "EVENTS_SERVICE"
+    }
+
+    private val retrofit = ServiceBuilder.buildService(token, EventsApi::class.java)
 
     fun getEvents(onResult: (MutableList<Event>?) -> Unit) {
         retrofit.getEvents().enqueue(
             object : Callback<MutableList<Event>> {
                 override fun onFailure(call: Call<MutableList<Event>>, t: Throwable) {
                     onResult(null)
-                    Log.d(LOG, t.message!!)
+                    Log.d(TAG, t.message!!)
                 }
 
                 override fun onResponse(
                     call: Call<MutableList<Event>>,
                     response: Response<MutableList<Event>>
                 ) {
-                    Log.d(LOG, "response ok")
+                    Log.d(TAG, "response ok")
+                    Log.d(TAG, "onResponse: " + response.code())
                     val events = response.body()
-                    Log.d(LOG, events.toString())
+                    Log.d(TAG, events.toString())
                     onResult(events)
                 }
             }
@@ -38,16 +43,16 @@ class EventsService {
             object : Callback<Event> {
                 override fun onFailure(call: Call<Event>, t: Throwable) {
                     onResult(null)
-                    Log.d(LOG, t.message!!)
+                    Log.d(TAG, t.message!!)
                 }
 
                 override fun onResponse(
                     call: Call<Event>,
                     response: Response<Event>
                 ) {
-                    Log.d(LOG, "response ok")
+                    Log.d(TAG, "response ok")
                     val event = response.body()
-                    Log.d(LOG, event.toString())
+                    Log.d(TAG, event.toString())
                     onResult(event)
                 }
             }
@@ -58,7 +63,7 @@ class EventsService {
         retrofit.addParticipant(eventId).enqueue(
             object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                    Log.d(LOG, "inc ok")
+                    Log.d(TAG, "inc ok")
 
                     getEvent(eventId) {
                         onResult(it)
@@ -66,11 +71,13 @@ class EventsService {
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Log.d(LOG, t.message!!)
+                    Log.d(TAG, t.message!!)
                 }
 
 
             }
         )
     }
+
+
 }

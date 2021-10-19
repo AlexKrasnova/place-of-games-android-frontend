@@ -3,4 +3,6 @@
     <string name="games">Игры</string>
     <string name="places">Площадки</string>
     <string name="sign_up">Записаться</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
 </resources>

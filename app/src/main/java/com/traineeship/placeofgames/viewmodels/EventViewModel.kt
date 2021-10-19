@@ -1,13 +1,15 @@
 package com.traineeship.placeofgames.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
 import com.traineeship.placeofgames.data.Event
-import com.traineeship.placeofgames.repository.EventsService
+import com.traineeship.placeofgames.data.Token
+import com.traineeship.placeofgames.repository.events.EventsService
+import com.traineeship.placeofgames.utils.TokenUtil
 
-class EventViewModel : ViewModel() {
-    private val eventsApiService = EventsService()
+class EventViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val eventsApiService = EventsService(TokenUtil(application.applicationContext).token!!)
 
     private val event: MutableLiveData<Event> = MutableLiveData()
 
