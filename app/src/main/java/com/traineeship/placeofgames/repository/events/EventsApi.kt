@@ -1,6 +1,6 @@
 package com.traineeship.placeofgames.repository.events
 
-import com.traineeship.placeofgames.data.Event
+import com.traineeship.placeofgames.data.event.Event
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -20,4 +20,10 @@ interface EventsApi {
         @Path("id")
         eventId: Int,
     ): Call<Event>
+
+    @DELETE("/api/v1/events/{id}/participants")
+    fun deleteParticipant(
+        @Path("id")
+        eventId: Int,
+    ): Call<Void>
 }

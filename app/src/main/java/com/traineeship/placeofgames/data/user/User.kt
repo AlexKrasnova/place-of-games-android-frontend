@@ -1,4 +1,4 @@
-package com.traineeship.placeofgames.data
+package com.traineeship.placeofgames.data.user
 
 data class User(
     val login: String,

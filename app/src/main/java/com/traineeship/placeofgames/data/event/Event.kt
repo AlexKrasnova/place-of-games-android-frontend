@@ -1,4 +1,4 @@
-package com.traineeship.placeofgames.data
+package com.traineeship.placeofgames.data.event
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -17,7 +17,8 @@ data class Event(
     @SerializedName("numberOfParticipants")
     val currentPeopleNum: Int,
 
-    val description: String?
+    val description: String?,
+    val isCurrentUserEnrolled: Boolean
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -27,7 +28,8 @@ data class Event(
         parcel.readParcelable(Place::class.java.classLoader),
         parcel.readInt(),
         parcel.readInt(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readByte() != 0.toByte()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -39,6 +41,7 @@ data class Event(
         parcel.writeInt(maxPeopleNum)
         parcel.writeInt(currentPeopleNum)
         parcel.writeString(description)
+        parcel.writeByte(if (isCurrentUserEnrolled) 1 else 0)
     }
 
     override fun describeContents(): Int {
@@ -54,4 +57,5 @@ data class Event(
             return arrayOfNulls(size)
         }
     }
+
 }

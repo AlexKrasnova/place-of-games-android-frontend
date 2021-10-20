@@ -9,18 +9,14 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.placeofgames.R
 import com.google.android.material.button.MaterialButton
-import com.traineeship.placeofgames.data.Event
-import com.traineeship.placeofgames.data.Token
-import com.traineeship.placeofgames.utils.TokenUtil
+import com.traineeship.placeofgames.data.event.Event
 import com.traineeship.placeofgames.viewmodels.EventViewModel
 
 class EventDescFragment : Fragment() {
 
-    private lateinit var event: Event
     private val eventViewModel: EventViewModel by viewModels()
 
     private lateinit var tvEventName: TextView
@@ -40,17 +36,16 @@ class EventDescFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_event_desc, container, false)
-        event = requireArguments().getParcelable("event")!!
+        var myEvent: Event = requireArguments().getParcelable("event")!!
 
         initViews(view)
+        setEventToViews(myEvent)
 
-        setEventToViews(event)
-
-        event.id.let {
+        myEvent.id.let {
             eventViewModel.getEventLiveData(it).observe(viewLifecycleOwner, { event ->
 
-                if (this.event != event) {
-                    this.event = event
+                if (myEvent != event) {
+                    myEvent = event
                     setEventToViews(event)
                 }
 
@@ -62,13 +57,26 @@ class EventDescFragment : Fragment() {
         }
 
         btnEventSignUp.setOnClickListener {
-            eventViewModel.incEventPeople(event.id)
+            if (!myEvent.isCurrentUserEnrolled) {
+                eventViewModel.incEventPeople(myEvent.id)
+            } else {
+                eventViewModel.decEventPeople(myEvent.id)
+            }
         }
 
         return view
     }
 
+    private fun setRightSignUpBtnText(event: Event){
+        if (event.isCurrentUserEnrolled){
+            btnEventSignUp.text = "Отменить"
+        } else {
+            btnEventSignUp.text = "Записаться"
+        }
+    }
+
     private fun setEventToViews(event: Event) {
+        setRightSignUpBtnText(event)
         val dateTime = event.time?.split("T")
         val date = dateTime?.get(0)
         val time = dateTime?.get(1)

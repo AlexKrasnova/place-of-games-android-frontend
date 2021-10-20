@@ -1,18 +1,15 @@
 package com.traineeship.placeofgames
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.placeofgames.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.traineeship.placeofgames.data.LoginData
+import com.traineeship.placeofgames.data.user.LoginData
 import com.traineeship.placeofgames.utils.TokenUtil
 import com.traineeship.placeofgames.viewmodels.AuthViewModel
 

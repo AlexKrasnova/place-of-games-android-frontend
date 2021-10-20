@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.placeofgames.R
-import com.traineeship.placeofgames.data.Event
+import com.google.android.material.button.MaterialButton
+import com.traineeship.placeofgames.data.event.Event
 import com.traineeship.placeofgames.viewmodels.EventListViewModel
 
 
@@ -57,8 +58,12 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
         swipeRefresh = view.findViewById(R.id.swipe_refresh_events)
     }
 
-    override fun onClickSignUp(v: View, eventId: Int) {
-        eventsViewModel.incEventPeople(eventId)
+    override fun onClickSignUp(v: View, event: Event) {
+        if (!event.isCurrentUserEnrolled) {
+            eventsViewModel.incEventPeople(event.id)
+        } else {
+            eventsViewModel.decEventPeople(event.id)
+        }
     }
 
     override fun onClickItem(v: View, event: Event) {

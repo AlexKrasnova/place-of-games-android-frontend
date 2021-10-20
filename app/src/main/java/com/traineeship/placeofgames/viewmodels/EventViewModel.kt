@@ -2,8 +2,7 @@ package com.traineeship.placeofgames.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.traineeship.placeofgames.data.Event
-import com.traineeship.placeofgames.data.Token
+import com.traineeship.placeofgames.data.event.Event
 import com.traineeship.placeofgames.repository.events.EventsService
 import com.traineeship.placeofgames.utils.TokenUtil
 
@@ -20,6 +19,12 @@ class EventViewModel(application: Application) : AndroidViewModel(application) {
 
     fun incEventPeople(eventId: Int){
         eventsApiService.incEventPeople(eventId) {
+            event.value = it
+        }
+    }
+
+    fun decEventPeople(eventId: Int){
+        eventsApiService.decEventPeople(eventId) {
             event.value = it
         }
     }

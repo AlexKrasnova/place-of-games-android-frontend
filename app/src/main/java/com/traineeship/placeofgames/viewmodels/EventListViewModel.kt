@@ -1,12 +1,9 @@
 package com.traineeship.placeofgames.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
-import com.traineeship.placeofgames.data.Event
-import com.traineeship.placeofgames.data.Token
+import com.traineeship.placeofgames.data.event.Event
 import com.traineeship.placeofgames.repository.events.EventsService
-import com.traineeship.placeofgames.repository.events.EventsService.Companion.TAG
 import com.traineeship.placeofgames.utils.TokenUtil
 
 class EventListViewModel(application: Application) : AndroidViewModel(
@@ -43,6 +40,14 @@ class EventListViewModel(application: Application) : AndroidViewModel(
         eventsApiService.getEvents() {
             if (it != null) {
                 events.value = it
+            }
+        }
+    }
+
+    fun decEventPeople(eventId: Int) {
+        eventsApiService.decEventPeople(eventId) {
+            if (it != null){
+                updatedEvent.value = it
             }
         }
     }

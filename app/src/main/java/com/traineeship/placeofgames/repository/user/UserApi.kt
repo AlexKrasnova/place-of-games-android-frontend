@@ -1,7 +1,7 @@
 package com.traineeship.placeofgames.repository.user
 
-import com.traineeship.placeofgames.data.LoginData
-import com.traineeship.placeofgames.data.Token
+import com.traineeship.placeofgames.data.user.LoginData
+import com.traineeship.placeofgames.data.user.Token
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

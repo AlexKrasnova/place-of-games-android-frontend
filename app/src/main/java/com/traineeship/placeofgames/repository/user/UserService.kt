@@ -1,11 +1,9 @@
 package com.traineeship.placeofgames.repository.user
 
 import android.util.Log
-import com.traineeship.placeofgames.data.Event
-import com.traineeship.placeofgames.data.LoginData
-import com.traineeship.placeofgames.data.Token
+import com.traineeship.placeofgames.data.user.LoginData
+import com.traineeship.placeofgames.data.user.Token
 import com.traineeship.placeofgames.repository.ServiceBuilder
-import com.traineeship.placeofgames.repository.events.EventsApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

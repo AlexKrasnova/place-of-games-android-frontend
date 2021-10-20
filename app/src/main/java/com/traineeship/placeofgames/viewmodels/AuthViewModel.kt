@@ -3,8 +3,8 @@ package com.traineeship.placeofgames.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.traineeship.placeofgames.data.LoginData
-import com.traineeship.placeofgames.data.Token
+import com.traineeship.placeofgames.data.user.LoginData
+import com.traineeship.placeofgames.data.user.Token
 import com.traineeship.placeofgames.repository.user.UserService
 
 class AuthViewModel : ViewModel() {

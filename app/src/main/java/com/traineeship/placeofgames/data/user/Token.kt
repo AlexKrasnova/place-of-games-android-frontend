@@ -1,4 +1,4 @@
-package com.traineeship.placeofgames.data
+package com.traineeship.placeofgames.data.user
 
 import com.google.gson.annotations.SerializedName
 

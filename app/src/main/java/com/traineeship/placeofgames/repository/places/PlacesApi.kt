@@ -1,9 +1,8 @@
 package com.traineeship.placeofgames.repository.places
 
-import com.traineeship.placeofgames.data.Place
+import com.traineeship.placeofgames.data.event.Place
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Path
 
 interface PlacesApi {

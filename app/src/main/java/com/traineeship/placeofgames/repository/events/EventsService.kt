@@ -1,8 +1,7 @@
 package com.traineeship.placeofgames.repository.events
 
 import android.util.Log
-import com.traineeship.placeofgames.data.Event
-import com.traineeship.placeofgames.data.Token
+import com.traineeship.placeofgames.data.event.Event
 import com.traineeship.placeofgames.repository.ServiceBuilder
 import retrofit2.Call
 import retrofit2.Callback
@@ -75,6 +74,24 @@ class EventsService(token: String) {
                 }
 
 
+            }
+        )
+    }
+
+    fun decEventPeople(eventId: Int, onResult: (Event?) -> Unit) {
+        retrofit.deleteParticipant(eventId).enqueue(
+            object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    Log.d(TAG, "dec ok")
+
+                    getEvent(eventId) {
+                        onResult(it)
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.d(TAG, t.message!!)
+                }
             }
         )
     }
