@@ -69,6 +69,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textfield_password" />
+        app:layout_constraintTop_toBottomOf="@+id/textfield_password"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Впервые в Place Of Games?"
+        app:layout_constraintBottom_toTopOf="@+id/btn_go_to_register"
+        app:layout_constraintEnd_toEndOf="@+id/btn_go_to_register"
+        app:layout_constraintStart_toStartOf="@+id/btn_go_to_register" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_go_to_register"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

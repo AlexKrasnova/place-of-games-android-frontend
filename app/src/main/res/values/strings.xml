@@ -5,4 +5,8 @@
     <string name="sign_up">Записаться</string>
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
+    <string name="name">Имя</string>
+    <string name="repeat_pass">Подтвердите пароль</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="registration">Регистрация</string>
 </resources>

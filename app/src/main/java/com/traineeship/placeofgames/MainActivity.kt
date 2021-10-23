@@ -23,7 +23,6 @@ class MainActivity : BaseActivity(), SharedPreferences.OnSharedPreferenceChangeL
     override fun onStart() {
         super.onStart()
 
-
         tokenUtil.preferences
             .registerOnSharedPreferenceChangeListener(this);
     }

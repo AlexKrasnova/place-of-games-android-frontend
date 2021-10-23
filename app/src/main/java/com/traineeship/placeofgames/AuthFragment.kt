@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.placeofgames.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -20,6 +21,7 @@ class AuthFragment : Fragment() {
     private lateinit var etLogin: TextInputEditText
     private lateinit var etPassword: TextInputEditText
     private lateinit var btnLogin: MaterialButton
+    private lateinit var btnGoToRegister: MaterialButton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +42,10 @@ class AuthFragment : Fragment() {
             }
         }
 
+        btnGoToRegister.setOnClickListener {
+            findNavController().navigate(R.id.action_authFragment_to_signUpFragment)
+        }
+
         return view
     }
 
@@ -47,5 +53,6 @@ class AuthFragment : Fragment() {
         etLogin = view.findViewById(R.id.et_login)
         etPassword = view.findViewById(R.id.et_password)
         btnLogin = view.findViewById(R.id.btn_login)
+        btnGoToRegister = view.findViewById(R.id.btn_go_to_register)
     }
 }
