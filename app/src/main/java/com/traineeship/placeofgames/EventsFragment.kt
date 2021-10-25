@@ -1,4 +1,4 @@
-package com.example.placeofgames
+package com.traineeship.placeofgames
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.placeofgames.data.Event
-import com.example.placeofgames.viewmodels.EventListViewModel
+import com.example.placeofgames.R
+import com.google.android.material.button.MaterialButton
+import com.traineeship.placeofgames.data.event.Event
+import com.traineeship.placeofgames.viewmodels.EventListViewModel
 
-class EventsFragment : Fragment(), EventsAdapter.EventClickListener{
+
+class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
@@ -27,6 +30,7 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener{
         val view = inflater.inflate(R.layout.fragment_events, container, false)
 
         initViews(view)
+
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = EventsAdapter(mutableListOf(), this)
         getEvents()
@@ -35,7 +39,7 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener{
             eventsViewModel.loadEvents()
         }
 
-        eventsViewModel.getUpdatedEvent().observe(viewLifecycleOwner, {event ->
+        eventsViewModel.getUpdatedEvent().observe(viewLifecycleOwner, { event ->
             (recyclerView.adapter as EventsAdapter).updateEvent(event)
         })
 
@@ -54,8 +58,12 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener{
         swipeRefresh = view.findViewById(R.id.swipe_refresh_events)
     }
 
-    override fun onClickSignUp(v: View, eventId: Int) {
-        eventsViewModel.incEventPeople(eventId)
+    override fun onClickSignUp(v: View, event: Event) {
+        if (!event.isCurrentUserEnrolled) {
+            eventsViewModel.incEventPeople(event.id)
+        } else {
+            eventsViewModel.decEventPeople(event.id)
+        }
     }
 
     override fun onClickItem(v: View, event: Event) {
