@@ -1,10 +1,11 @@
-package com.traineeship.placeofgames
+package com.traineeship.placeofgames.view
 
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.placeofgames.R
@@ -38,6 +39,10 @@ class MainActivity : BaseActivity(), SharedPreferences.OnSharedPreferenceChangeL
         isLogin = tokenUtil.token != null
         updateUiIfLogin()
 
+        setUpBottomNav()
+    }
+
+    private fun setUpBottomNav() {
         bottomNav.setupWithNavController(navController)
 
         bottomNav.setOnItemReselectedListener {
@@ -45,6 +50,25 @@ class MainActivity : BaseActivity(), SharedPreferences.OnSharedPreferenceChangeL
                 R.id.games -> navController.navigateUp()
             }
         }
+
+        bottomNav.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.games -> {
+                    navController.navigate(R.id.eventsFragment)
+                    true
+                }
+                R.id.places -> {
+                    navController.navigate(R.id.placesFragment)
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        //todo
     }
 
     private fun initViews() {

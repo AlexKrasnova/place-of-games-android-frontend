@@ -53,9 +53,3 @@ class EventListViewModel(application: Application) : AndroidViewModel(
     }
 
 }
-
-//class EventListViewModelFactory(private val token: Token) : ViewModelProvider.Factory {
-//    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-//        return modelClass.getConstructor(EventListViewModel::class.java).newInstance(token)
-//    }
-//}
