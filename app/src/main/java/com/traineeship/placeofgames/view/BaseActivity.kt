@@ -1,4 +1,4 @@
-package com.traineeship.placeofgames
+package com.traineeship.placeofgames.view
 
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity

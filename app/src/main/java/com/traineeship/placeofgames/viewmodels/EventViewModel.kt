@@ -12,7 +12,7 @@ class EventViewModel(application: Application) : AndroidViewModel(application) {
 
     private val event: MutableLiveData<Event> = MutableLiveData()
 
-    fun getEventLiveData(eventId: Int): LiveData<Event> {
+    fun getEvent(eventId: Int): LiveData<Event> {
         loadEvent(eventId)
         return event
     }

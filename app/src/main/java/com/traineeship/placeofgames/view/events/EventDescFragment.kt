@@ -1,4 +1,4 @@
-package com.traineeship.placeofgames
+package com.traineeship.placeofgames.view.events
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -42,7 +42,7 @@ class EventDescFragment : Fragment() {
         setEventToViews(myEvent)
 
         myEvent.id.let {
-            eventViewModel.getEventLiveData(it).observe(viewLifecycleOwner, { event ->
+            eventViewModel.getEvent(it).observe(viewLifecycleOwner, { event ->
 
                 if (myEvent != event) {
                     myEvent = event
@@ -91,8 +91,8 @@ class EventDescFragment : Fragment() {
     }
 
     private fun initViews(view: View) {
-        tvEventName = view.findViewById(R.id.tv_event_name)
-        ivEvent = view.findViewById(R.id.iv_event)
+        tvEventName = view.findViewById(R.id.tv_place_name)
+        ivEvent = view.findViewById(R.id.iv_place)
         tvTime = view.findViewById(R.id.tv_time)
         tvDuration = view.findViewById(R.id.tv_duration)
         tvWhere = view.findViewById(R.id.tv_place)

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PlaceOfGames">
         <activity
-            android:name="com.traineeship.placeofgames.MainActivity"
+            android:name="com.traineeship.placeofgames.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

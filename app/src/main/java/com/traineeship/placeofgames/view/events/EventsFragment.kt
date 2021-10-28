@@ -1,4 +1,4 @@
-package com.traineeship.placeofgames
+package com.traineeship.placeofgames.view.events
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.placeofgames.R
-import com.google.android.material.button.MaterialButton
 import com.traineeship.placeofgames.data.event.Event
 import com.traineeship.placeofgames.viewmodels.EventListViewModel
 
@@ -55,7 +54,7 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
 
     private fun initViews(view: View) {
         recyclerView = view.findViewById(R.id.rv_places)
-        swipeRefresh = view.findViewById(R.id.swipe_refresh_events)
+        swipeRefresh = view.findViewById(R.id.swipe_refresh_places)
     }
 
     override fun onClickSignUp(v: View, event: Event) {

@@ -1,4 +1,4 @@
-package com.traineeship.placeofgames
+package com.traineeship.placeofgames.view.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
