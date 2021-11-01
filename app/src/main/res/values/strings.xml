@@ -9,4 +9,5 @@
     <string name="repeat_pass">Подтвердите пароль</string>
     <string name="register">Зарегистрироваться</string>
     <string name="registration">Регистрация</string>
+    <string name="working_hours">Время работы</string>
 </resources>

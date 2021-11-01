@@ -3,31 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/eventsFragment">
+    app:startDestination="@id/events">
 
     <fragment
-        android:id="@+id/eventsFragment"
+        android:id="@+id/events"
         android:name="com.traineeship.placeofgames.view.events.EventsFragment"
         android:label="EventsFragment"
         tools:layout="@layout/fragment_events">
         <action
             android:id="@+id/action_to_event_desc"
             app:destination="@id/eventDescFragment">
-            <argument
-                android:name="eventId"
-                android:defaultValue="-1"
-                app:argType="integer" />
         </action>
-
     </fragment>
+
     <fragment
         android:id="@+id/eventDescFragment"
         android:name="com.traineeship.placeofgames.view.events.EventDescFragment"
         android:label="EventDescFragment"
-        tools:layout="@layout/fragment_event_desc" />
+        tools:layout="@layout/fragment_event_desc">
+        <argument
+            android:name="eventId"
+            app:argType="integer"
+            app:nullable="false" />
+    </fragment>
+
     <fragment
-        android:id="@+id/placesFragment"
+        android:id="@+id/places"
         android:name="com.traineeship.placeofgames.view.places.PlacesFragment"
         android:label="PlacesFragment"
-        tools:layout="@layout/fragment_places"/>
+        tools:layout="@layout/fragment_places">
+        <action
+            android:id="@+id/action_placesFragment_to_placeDescFragment"
+            app:destination="@id/placeDescFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/placeDescFragment"
+        android:name="com.traineeship.placeofgames.view.places.PlaceDescFragment"
+        android:label="PlaceDescFragment"
+        tools:layout="@layout/fragment_place_desc">
+        <argument
+            android:name="placeId"
+            app:argType="integer"
+            app:nullable="false" />
+    </fragment>
 </navigation>

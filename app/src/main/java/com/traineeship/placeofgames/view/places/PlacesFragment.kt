@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -50,6 +51,10 @@ class PlacesFragment : Fragment(), PlacesAdapter.PlaceClickListener {
     }
 
     override fun onClickItem(view: View, placeId: Int) {
-
+        findNavController().navigate(
+            PlacesFragmentDirections.actionPlacesFragmentToPlaceDescFragment(
+                placeId
+            )
+        )
     }
 }

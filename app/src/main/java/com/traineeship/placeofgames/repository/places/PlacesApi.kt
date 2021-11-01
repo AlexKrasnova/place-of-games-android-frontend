@@ -14,5 +14,5 @@ interface PlacesApi {
     fun getPlace(
         @Path("id")
         placeId: Int,
-    )
+    ): Call<Place>
 }

@@ -10,14 +10,18 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.placeofgames.R
 import com.google.android.material.button.MaterialButton
 import com.traineeship.placeofgames.data.event.Event
-import com.traineeship.placeofgames.viewmodels.EventViewModel
+import com.traineeship.placeofgames.viewmodels.EventDescViewModel
 
 class EventDescFragment : Fragment() {
 
-    private val eventViewModel: EventViewModel by viewModels()
+    private val eventViewModel: EventDescViewModel by viewModels()
+
+    private val args: EventDescFragmentArgs by navArgs()
+    private val eventId by lazy { args.eventId }
 
     private lateinit var tvEventName: TextView
     private lateinit var ivEvent: ImageView
@@ -36,32 +40,14 @@ class EventDescFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_event_desc, container, false)
-        var myEvent: Event = requireArguments().getParcelable("event")!!
 
         initViews(view)
-        setEventToViews(myEvent)
-
-        myEvent.id.let {
-            eventViewModel.getEvent(it).observe(viewLifecycleOwner, { event ->
-
-                if (myEvent != event) {
-                    myEvent = event
-                    setEventToViews(event)
-                }
-
-            })
-        }
+        eventViewModel.getEvent(eventId).observe(viewLifecycleOwner, { event ->
+            setEventToViews(event)
+        })
 
         btnBack.setOnClickListener {
             findNavController().popBackStack()
-        }
-
-        btnEventSignUp.setOnClickListener {
-            if (!myEvent.isCurrentUserEnrolled) {
-                eventViewModel.incEventPeople(myEvent.id)
-            } else {
-                eventViewModel.decEventPeople(myEvent.id)
-            }
         }
 
         return view
@@ -77,6 +63,14 @@ class EventDescFragment : Fragment() {
 
     private fun setEventToViews(event: Event) {
         setRightSignUpBtnText(event)
+        btnEventSignUp.setOnClickListener {
+            if (!event.isCurrentUserEnrolled) {
+                eventViewModel.incEventPeople(event.id)
+            } else {
+                eventViewModel.decEventPeople(event.id)
+            }
+        }
+
         val dateTime = event.time?.split("T")
         val date = dateTime?.get(0)
         val time = dateTime?.get(1)
@@ -91,8 +85,8 @@ class EventDescFragment : Fragment() {
     }
 
     private fun initViews(view: View) {
-        tvEventName = view.findViewById(R.id.tv_place_name)
-        ivEvent = view.findViewById(R.id.iv_place)
+        tvEventName = view.findViewById(R.id.tv_event_name)
+        ivEvent = view.findViewById(R.id.iv_event)
         tvTime = view.findViewById(R.id.tv_time)
         tvDuration = view.findViewById(R.id.tv_duration)
         tvWhere = view.findViewById(R.id.tv_place)

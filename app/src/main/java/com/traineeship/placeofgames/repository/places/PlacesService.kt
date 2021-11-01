@@ -35,4 +35,23 @@ class PlacesService(token: String) {
             }
         )
     }
+    
+    fun getPlace(placeId: Int, onResult: (Place?) -> Unit) {
+        retrofit.getPlace(placeId).enqueue(
+            object : Callback<Place> {
+                override fun onResponse(call: Call<Place>, response: Response<Place>) {
+                    Log.d(TAG, "onResponse: ok")
+                    val place = response.body()
+                    Log.d(TAG, place.toString())
+                    onResult(place)
+                }
+
+                override fun onFailure(call: Call<Place>, t: Throwable) {
+                    onResult(null)
+                    Log.d(TAG, "onFailure: ${t.message}")
+                }
+
+            }
+        )
+    }
 }

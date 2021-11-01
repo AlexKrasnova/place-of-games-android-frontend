@@ -6,7 +6,7 @@ import com.traineeship.placeofgames.data.event.Event
 import com.traineeship.placeofgames.repository.events.EventsService
 import com.traineeship.placeofgames.utils.TokenUtil
 
-class EventViewModel(application: Application) : AndroidViewModel(application) {
+class EventDescViewModel(application: Application) : AndroidViewModel(application) {
 
     private val eventsApiService = EventsService(TokenUtil(application.applicationContext).token!!)
 
