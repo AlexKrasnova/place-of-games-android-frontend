@@ -6,7 +6,7 @@ import com.traineeship.placeofgames.data.event.Event
 import com.traineeship.placeofgames.repository.events.EventsService
 import com.traineeship.placeofgames.utils.TokenUtil
 
-class EventListViewModel(application: Application) : AndroidViewModel(
+class EventsViewModel(application: Application) : AndroidViewModel(
     application
 ) {
 

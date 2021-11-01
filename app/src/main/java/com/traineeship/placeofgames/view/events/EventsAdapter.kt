@@ -51,8 +51,8 @@ class EventsAdapter(
         }
 
         holder.tvName.text = event.name
-        holder.tvAddress.text = event.place?.address
-        holder.tvPeople.text = "Кол-во участников: ${event.currentPeopleNum}/${event.maxPeopleNum}"
+        holder.tvAddress.text = event.place.address
+        holder.tvPeople.text = "Кол-во участников: ${event.numberOfParticipants}/${event.maxNumberOfParticipants}"
         holder.btnSignUp.setOnClickListener {
             eventClickListener.onClickSignUp(it, event)
         }

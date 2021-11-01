@@ -10,14 +10,19 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.placeofgames.R
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.traineeship.placeofgames.data.event.Event
-import com.traineeship.placeofgames.viewmodels.EventViewModel
+import com.traineeship.placeofgames.viewmodels.EventDescViewModel
 
 class EventDescFragment : Fragment() {
 
-    private val eventViewModel: EventViewModel by viewModels()
+    private val eventViewModel: EventDescViewModel by viewModels()
+
+    private val args: EventDescFragmentArgs by navArgs()
+    private val eventId by lazy { args.eventId }
 
     private lateinit var tvEventName: TextView
     private lateinit var ivEvent: ImageView
@@ -28,6 +33,7 @@ class EventDescFragment : Fragment() {
     private lateinit var tvPeopleNum: TextView
     private lateinit var tvDesc: TextView
     private lateinit var btnBack: AppCompatImageButton
+    private lateinit var btnParticipants: AppCompatImageButton
     private lateinit var btnEventSignUp: MaterialButton
 
     override fun onCreateView(
@@ -36,33 +42,26 @@ class EventDescFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_event_desc, container, false)
-        var myEvent: Event = requireArguments().getParcelable("event")!!
 
         initViews(view)
-        setEventToViews(myEvent)
-
-        myEvent.id.let {
-            eventViewModel.getEvent(it).observe(viewLifecycleOwner, { event ->
-
-                if (myEvent != event) {
-                    myEvent = event
-                    setEventToViews(event)
-                }
-
-            })
-        }
+        eventViewModel.getEvent(eventId).observe(viewLifecycleOwner, { event ->
+            setEventToViews(event)
+            btnParticipants.setOnClickListener {
+                val items = event.participants?.map { it.name }?.toTypedArray()
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(resources.getString(R.string.participants))
+                    .setItems(items) { dialog, which ->
+                        // Respond to item chosen
+                    }
+                    .show()
+            }
+        })
 
         btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
 
-        btnEventSignUp.setOnClickListener {
-            if (!myEvent.isCurrentUserEnrolled) {
-                eventViewModel.incEventPeople(myEvent.id)
-            } else {
-                eventViewModel.decEventPeople(myEvent.id)
-            }
-        }
+
 
         return view
     }
@@ -77,13 +76,21 @@ class EventDescFragment : Fragment() {
 
     private fun setEventToViews(event: Event) {
         setRightSignUpBtnText(event)
-        val dateTime = event.time?.split("T")
-        val date = dateTime?.get(0)
-        val time = dateTime?.get(1)
+        btnEventSignUp.setOnClickListener {
+            if (!event.isCurrentUserEnrolled) {
+                eventViewModel.incEventPeople(event.id)
+            } else {
+                eventViewModel.decEventPeople(event.id)
+            }
+        }
+
+        val dateTime = event.time.split("T")
+        val date = dateTime[0]
+        val time = dateTime[1]
 
         tvEventName.text = event.name
         tvDesc.text = "Описание: ${event.description}"
-        tvPeopleNum.text = "Кол-во участников: ${event.currentPeopleNum}/${event.maxPeopleNum}"
+        tvPeopleNum.text = "Кол-во участников: ${event.numberOfParticipants}/${event.maxNumberOfParticipants}"
         tvAddress.text = "Адрес: ${event.place?.address}"
         tvWhere.text = "Место: ${event.place?.name}"
         tvDuration.text = "Продолжительность: ${event.duration} мин"
@@ -91,8 +98,8 @@ class EventDescFragment : Fragment() {
     }
 
     private fun initViews(view: View) {
-        tvEventName = view.findViewById(R.id.tv_place_name)
-        ivEvent = view.findViewById(R.id.iv_place)
+        tvEventName = view.findViewById(R.id.tv_event_name)
+        ivEvent = view.findViewById(R.id.iv_event)
         tvTime = view.findViewById(R.id.tv_time)
         tvDuration = view.findViewById(R.id.tv_duration)
         tvWhere = view.findViewById(R.id.tv_place)
@@ -100,6 +107,7 @@ class EventDescFragment : Fragment() {
         tvPeopleNum = view.findViewById(R.id.tv_people_num)
         tvDesc = view.findViewById(R.id.tv_desc)
         btnBack = view.findViewById(R.id.btn_back)
+        btnParticipants = view.findViewById(R.id.btn_participants)
         btnEventSignUp = view.findViewById(R.id.btn_event_sign_up)
     }
 }

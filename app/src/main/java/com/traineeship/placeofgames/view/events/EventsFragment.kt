@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.placeofgames.R
 import com.traineeship.placeofgames.data.event.Event
-import com.traineeship.placeofgames.viewmodels.EventListViewModel
+import com.traineeship.placeofgames.viewmodels.EventsViewModel
 
 
 class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
-    private val eventsViewModel: EventListViewModel by viewModels()
+    private val eventsViewModel: EventsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,8 +66,8 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
     }
 
     override fun onClickItem(v: View, event: Event) {
-        val bundle = Bundle()
-        bundle.putParcelable("event", event)
-        findNavController().navigate(R.id.eventDescFragment, bundle)
+        findNavController().navigate(
+            EventsFragmentDirections.actionToEventDesc(event.id)
+        )
     }
 }
