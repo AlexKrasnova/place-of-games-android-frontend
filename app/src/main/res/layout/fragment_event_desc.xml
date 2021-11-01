@@ -17,6 +17,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_event_name" />
 
+
+
     <TextView
         android:id="@+id/tv_event_name"
         android:layout_width="wrap_content"
@@ -83,6 +85,18 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_address" />
+
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_participants"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/parent"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_help"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_people_num"
+        app:layout_constraintStart_toEndOf="@+id/tv_people_num"
+        app:layout_constraintTop_toTopOf="@+id/tv_people_num" />
 
     <TextView
         android:id="@+id/tv_desc"

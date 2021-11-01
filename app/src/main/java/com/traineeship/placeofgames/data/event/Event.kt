@@ -10,13 +10,9 @@ data class Event(
     val time: String,
     val duration: Int,
     val place: Place,
-
-    @SerializedName("maxNumberOfParticipants")
-    val maxPeopleNum: Int,
-
-    @SerializedName("numberOfParticipants")
-    val currentPeopleNum: Int,
-
+    val maxNumberOfParticipants: Int,
+    val numberOfParticipants: Int,
     val description: String,
-    val isCurrentUserEnrolled: Boolean
+    val isCurrentUserEnrolled: Boolean,
+    val participants: List<Participant>?
 )

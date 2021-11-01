@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.placeofgames.R
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.traineeship.placeofgames.data.event.Event
 import com.traineeship.placeofgames.viewmodels.EventDescViewModel
 
@@ -32,6 +33,7 @@ class EventDescFragment : Fragment() {
     private lateinit var tvPeopleNum: TextView
     private lateinit var tvDesc: TextView
     private lateinit var btnBack: AppCompatImageButton
+    private lateinit var btnParticipants: AppCompatImageButton
     private lateinit var btnEventSignUp: MaterialButton
 
     override fun onCreateView(
@@ -44,11 +46,22 @@ class EventDescFragment : Fragment() {
         initViews(view)
         eventViewModel.getEvent(eventId).observe(viewLifecycleOwner, { event ->
             setEventToViews(event)
+            btnParticipants.setOnClickListener {
+                val items = event.participants?.map { it.name }?.toTypedArray()
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(resources.getString(R.string.participants))
+                    .setItems(items) { dialog, which ->
+                        // Respond to item chosen
+                    }
+                    .show()
+            }
         })
 
         btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
+
+
 
         return view
     }
@@ -71,13 +84,13 @@ class EventDescFragment : Fragment() {
             }
         }
 
-        val dateTime = event.time?.split("T")
-        val date = dateTime?.get(0)
-        val time = dateTime?.get(1)
+        val dateTime = event.time.split("T")
+        val date = dateTime[0]
+        val time = dateTime[1]
 
         tvEventName.text = event.name
         tvDesc.text = "Описание: ${event.description}"
-        tvPeopleNum.text = "Кол-во участников: ${event.currentPeopleNum}/${event.maxPeopleNum}"
+        tvPeopleNum.text = "Кол-во участников: ${event.numberOfParticipants}/${event.maxNumberOfParticipants}"
         tvAddress.text = "Адрес: ${event.place?.address}"
         tvWhere.text = "Место: ${event.place?.name}"
         tvDuration.text = "Продолжительность: ${event.duration} мин"
@@ -94,6 +107,7 @@ class EventDescFragment : Fragment() {
         tvPeopleNum = view.findViewById(R.id.tv_people_num)
         tvDesc = view.findViewById(R.id.tv_desc)
         btnBack = view.findViewById(R.id.btn_back)
+        btnParticipants = view.findViewById(R.id.btn_participants)
         btnEventSignUp = view.findViewById(R.id.btn_event_sign_up)
     }
 }
