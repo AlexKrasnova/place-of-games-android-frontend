@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.placeofgames.R
+import com.traineeship.placeofgames.R
 import com.google.android.material.button.MaterialButton
 import com.traineeship.placeofgames.data.event.Event
 

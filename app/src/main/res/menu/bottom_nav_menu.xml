@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/events"
-        android:enabled="true"
+        android:id="@+id/nav_graph_events"
         android:icon="@drawable/ic_games"
+        android:menuCategory="secondary"
         android:title="@string/games" />
 
-    <item android:id="@+id/places"
-        android:enabled="true"
+    <item android:id="@+id/nav_graph_places"
         android:icon="@drawable/ic_places"
+        android:menuCategory="secondary"
         android:title="@string/places"/>
 
 </menu>

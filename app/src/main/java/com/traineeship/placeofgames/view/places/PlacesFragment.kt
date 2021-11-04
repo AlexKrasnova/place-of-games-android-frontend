@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.placeofgames.R
+import com.traineeship.placeofgames.R
 import com.traineeship.placeofgames.viewmodels.PlacesViewModel
 
 class PlacesFragment : Fragment(), PlacesAdapter.PlaceClickListener {
