@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/drawable/ic_account.xml" value="0.2866666666666667" />
+        <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/drawable/ic_games.xml" value="0.2866666666666667" />
         <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2911458333333333" />
         <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/layout/activity_base.xml" value="0.275" />
         <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/layout/activity_main.xml" value="0.275" />
+        <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/layout/fragmenet_profile_content.xml" value="0.275" />
         <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/layout/fragment_auth.xml" value="0.268" />
         <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/layout/fragment_auth_container.xml" value="0.275" />
         <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/layout/fragment_content_container.xml" value="0.275" />
@@ -13,6 +16,7 @@
         <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/layout/fragment_events.xml" value="0.275" />
         <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/layout/fragment_place_desc.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/layout/fragment_places.xml" value="0.275" />
+        <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/layout/fragment_profile.xml" value="0.275" />
         <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/layout/fragment_register.xml" value="0.24344569288389514" />
         <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/layout/fragment_sign_up.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/Place_Of_Games/app/src/main/res/layout/item_event.xml" value="0.275" />

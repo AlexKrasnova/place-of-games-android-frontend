@@ -27,7 +27,51 @@ class EventsService(token: String) {
                     call: Call<MutableList<Event>>,
                     response: Response<MutableList<Event>>
                 ) {
-                    Log.d(TAG, "response ok")
+                    Log.d(TAG, "events ok")
+                    Log.d(TAG, "onResponse: " + response.code())
+                    val events = response.body()
+                    Log.d(TAG, events.toString())
+                    onResult(events)
+                }
+            }
+        )
+    }
+
+    fun getOwnedEvents(onResult: (MutableList<Event>?) -> Unit) {
+        retrofit.getOwnedEvents().enqueue(
+            object : Callback<MutableList<Event>> {
+                override fun onFailure(call: Call<MutableList<Event>>, t: Throwable) {
+                    onResult(null)
+                    Log.d(TAG, t.message!!)
+                }
+
+                override fun onResponse(
+                    call: Call<MutableList<Event>>,
+                    response: Response<MutableList<Event>>
+                ) {
+                    Log.d(TAG, "owned events ok")
+                    Log.d(TAG, "onResponse: " + response.code())
+                    val events = response.body()
+                    Log.d(TAG, events.toString())
+                    onResult(events)
+                }
+            }
+        )
+    }
+
+    fun getParticipateEvents(onResult: (MutableList<Event>?) -> Unit){
+        retrofit.getParticipateEvents().enqueue(
+            object : Callback<MutableList<Event>> {
+                override fun onFailure(call: Call<MutableList<Event>>, t: Throwable) {
+                    onResult(null)
+                    Log.d(TAG, t.message!!)
+                }
+
+                override fun onResponse(
+                    call: Call<MutableList<Event>>,
+                    response: Response<MutableList<Event>>
+                ) {
+                    Log.d(TAG, "participate events ok")
                     Log.d(TAG, "onResponse: " + response.code())
                     val events = response.body()
                     Log.d(TAG, events.toString())

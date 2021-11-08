@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.traineeship.placeofgames.R
 import com.traineeship.placeofgames.utils.setupWithNavController
 
-class ContainerContent : Fragment(), MainActivity.IOnBackPressed {
+class ContainerContent : Fragment(){
 
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var navController: NavController
@@ -33,7 +33,8 @@ class ContainerContent : Fragment(), MainActivity.IOnBackPressed {
         bottomNav.setupWithNavController(
             listOf(
                 R.navigation.nav_graph_events,
-                R.navigation.nav_graph_places
+                R.navigation.nav_graph_places,
+                R.navigation.nav_graph_profile
             ), childFragmentManager, R.id.nav_host_fragment_content,
         ).observe(viewLifecycleOwner) {
             navController = it
@@ -42,9 +43,5 @@ class ContainerContent : Fragment(), MainActivity.IOnBackPressed {
 
     private fun initViews(view: View){
         bottomNav = view.findViewById(R.id.bottom_nav)
-    }
-
-    override fun onBackPressed(): Boolean {
-        return true
     }
 }

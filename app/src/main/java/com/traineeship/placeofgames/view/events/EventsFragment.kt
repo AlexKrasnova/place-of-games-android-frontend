@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.traineeship.placeofgames.R
 import com.traineeship.placeofgames.data.event.Event
+import com.traineeship.placeofgames.view.profile.ProfileFragmentDirections
 import com.traineeship.placeofgames.viewmodels.EventsViewModel
 
 
@@ -20,6 +21,7 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private val eventsViewModel: EventsViewModel by viewModels()
+    private var type: String = Constants.TYPE_STANDARD
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,10 +34,15 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
 
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = EventsAdapter(mutableListOf(), this)
-        getEvents()
+
+        arguments?.takeIf { it.containsKey(Constants.EVENTS_TYPE) }?.apply {
+            type = getString(Constants.EVENTS_TYPE)!!
+        }
+
+        observeEvents()
 
         swipeRefresh.setOnRefreshListener {
-            eventsViewModel.loadEvents()
+            loadTypedEvents()
         }
 
         eventsViewModel.getUpdatedEvent().observe(viewLifecycleOwner, { event ->
@@ -45,11 +52,38 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
         return view
     }
 
-    private fun getEvents() {
-        eventsViewModel.getEvents().observe(viewLifecycleOwner, { events ->
-            recyclerView.adapter = EventsAdapter(events, this)
-            swipeRefresh.isRefreshing = false
-        })
+    private fun loadTypedEvents() {
+        when (type) {
+            Constants.TYPE_STANDARD -> eventsViewModel.loadEvents()
+            Constants.TYPE_OWNED_EVENTS -> eventsViewModel.loadOwnedEvents()
+            Constants.TYPE_PARTICIPATE_EVENTS -> eventsViewModel.loadParticipateEvents()
+        }
+    }
+
+    private fun observeEvents() {
+        when (type) {
+            Constants.TYPE_STANDARD -> {
+                eventsViewModel.getEvents().observe(viewLifecycleOwner, {
+                    recyclerView.adapter = EventsAdapter(it, this)
+                    swipeRefresh.isRefreshing = false
+                })
+            }
+
+            Constants.TYPE_OWNED_EVENTS -> {
+                eventsViewModel.getOwnedEvents().observe(viewLifecycleOwner) {
+                    recyclerView.adapter = EventsAdapter(it, this)
+                    swipeRefresh.isRefreshing = false
+                }
+            }
+
+            Constants.TYPE_PARTICIPATE_EVENTS -> {
+                eventsViewModel.getParticipateEvents().observe(viewLifecycleOwner) {
+                    recyclerView.adapter = EventsAdapter(it, this)
+                    swipeRefresh.isRefreshing = false
+                }
+            }
+        }
+
     }
 
     private fun initViews(view: View) {
@@ -67,7 +101,18 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
 
     override fun onClickItem(v: View, event: Event) {
         findNavController().navigate(
-            EventsFragmentDirections.actionToEventDesc(event.id)
+            if (type == Constants.TYPE_STANDARD) {
+                EventsFragmentDirections.actionToEventDesc(event.id)
+            } else {
+                ProfileFragmentDirections.actionProfileFragmentToEventDescFragment(event.id)
+            }
         )
+    }
+
+    object Constants {
+        const val EVENTS_TYPE = "EVENTS_TYPE"
+        const val TYPE_OWNED_EVENTS = "OWNED_EVENTS"
+        const val TYPE_PARTICIPATE_EVENTS = "PARTICIPATE_EVENTS"
+        const val TYPE_STANDARD = "STANDARD"
     }
 }

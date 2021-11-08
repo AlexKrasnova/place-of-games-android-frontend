@@ -9,7 +9,7 @@ import com.traineeship.placeofgames.data.user.User
 import com.traineeship.placeofgames.repository.user.UserService
 
 class AuthViewModel : ViewModel() {
-    private val userApiService = UserService()
+    private val userApiService = UserService(null)
 
     private val token: MutableLiveData<Token> = MutableLiveData()
 
