@@ -2,11 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/events">
+    android:id="@+id/nav_graph_events"
+    app:startDestination="@id/eventsFragment">
 
     <fragment
-        android:id="@+id/events"
+        android:id="@+id/eventsFragment"
         android:name="com.traineeship.placeofgames.view.events.EventsFragment"
         android:label="EventsFragment"
         tools:layout="@layout/fragment_events">
@@ -27,24 +27,4 @@
             app:nullable="false" />
     </fragment>
 
-    <fragment
-        android:id="@+id/places"
-        android:name="com.traineeship.placeofgames.view.places.PlacesFragment"
-        android:label="PlacesFragment"
-        tools:layout="@layout/fragment_places">
-        <action
-            android:id="@+id/action_placesFragment_to_placeDescFragment"
-            app:destination="@id/placeDescFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/placeDescFragment"
-        android:name="com.traineeship.placeofgames.view.places.PlaceDescFragment"
-        android:label="PlaceDescFragment"
-        tools:layout="@layout/fragment_place_desc">
-        <argument
-            android:name="placeId"
-            app:argType="integer"
-            app:nullable="false" />
-    </fragment>
 </navigation>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/containerAuth">
+
+    <fragment
+        android:id="@+id/containerAuth"
+        android:name="com.traineeship.placeofgames.view.ContainerAuth"
+        android:label="ContainerAuth" >
+        <action
+            android:id="@+id/action_containerAuth_to_containerContent"
+            app:destination="@id/containerContent"
+            app:popUpTo="@id/containerAuth"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/containerContent"
+        android:name="com.traineeship.placeofgames.view.ContainerContent"
+        android:label="ContainerContent" >
+        <action
+            android:id="@+id/action_containerContent_to_containerAuth"
+            app:destination="@id/containerAuth"
+            app:popUpTo="@id/containerContent"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>

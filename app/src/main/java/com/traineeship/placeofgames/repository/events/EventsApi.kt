@@ -9,6 +9,12 @@ interface EventsApi {
     @GET("api/v1/events")
     fun getEvents(): Call<MutableList<Event>>
 
+    @GET("api/v1/user/events-to-participate")
+    fun getParticipateEvents(): Call<MutableList<Event>>
+
+    @GET("api/v1/user/owned-events")
+    fun getOwnedEvents(): Call<MutableList<Event>>
+
     @POST("api/v1/events/{id}/participants")
     fun addParticipant(
         @Path("id")
