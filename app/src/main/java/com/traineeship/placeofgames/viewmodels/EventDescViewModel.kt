@@ -29,6 +29,10 @@ class EventDescViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    fun deleteEvent(eventId: Int){
+        eventsApiService.deleteEvent(eventId)
+    }
+
     private fun loadEvent(eventId: Int) {
         eventsApiService.getEvent(eventId) {
             if (it != null) {

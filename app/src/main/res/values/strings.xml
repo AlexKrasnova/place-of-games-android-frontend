@@ -12,4 +12,5 @@
     <string name="registration">Регистрация</string>
     <string name="working_hours">Время работы</string>
     <string name="profile">Профиль</string>
+    <string name="delete">Удалить</string>
 </resources>

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -14,6 +15,10 @@ import com.traineeship.placeofgames.R
 import com.traineeship.placeofgames.data.event.Event
 import com.traineeship.placeofgames.view.profile.ProfileFragmentDirections
 import com.traineeship.placeofgames.viewmodels.EventsViewModel
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+
+import com.traineeship.placeofgames.utils.SwipeToDeleteCallback
 
 
 class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
@@ -40,6 +45,10 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
         }
 
         observeEvents()
+
+        if (type == Constants.TYPE_OWNED_EVENTS) {
+            enableSwipeToDeleteAndUndo()
+        }
 
         swipeRefresh.setOnRefreshListener {
             loadTypedEvents()
@@ -84,6 +93,31 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
             }
         }
 
+    }
+
+    private fun enableSwipeToDeleteAndUndo() {
+        val swipeToDeleteCallback: SwipeToDeleteCallback = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, i: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                val adapter = recyclerView.adapter as EventsAdapter
+                val event = adapter.getData()[position]
+
+                adapter.removeItem(position)
+
+                MaterialAlertDialogBuilder(requireContext()).
+                    setTitle("Удалить мероприятие?")
+                    .setMessage("В этом мероприятии находится ${event.numberOfParticipants} человек" )
+                    .setPositiveButton("Да") { _, _ ->
+                        eventsViewModel.deleteEvent(event.id)
+                    }
+                    .setNegativeButton("Нет") { _, _ ->
+                        adapter.restoreItem(event, position)
+                    }
+                    .show()
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     private fun initViews(view: View) {

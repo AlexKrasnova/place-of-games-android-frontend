@@ -51,6 +51,10 @@ class EventsViewModel(application: Application) : AndroidViewModel(
         return updatedEvent
     }
 
+    fun deleteEvent(eventId: Int){
+        eventsApiService.deleteEvent(eventId)
+    }
+
     fun loadEvents() {
         eventsApiService.getEvents() {
             it?.let {  events.value = it }

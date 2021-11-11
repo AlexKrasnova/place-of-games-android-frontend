@@ -49,9 +49,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private fun updateUiIfLogin(){
         if (isLogin){
-            navController.navigate(R.id.action_containerAuth_to_containerContent)
+            navController.navigate(R.id.containerContent)
         } else {
-            navController.navigate(R.id.action_containerContent_to_containerAuth)
+            navController.navigate(R.id.containerAuth)
         }
     }
 

@@ -32,4 +32,10 @@ interface EventsApi {
         @Path("id")
         eventId: Int,
     ): Call<Void>
+
+    @DELETE("api/v1/events/{id}")
+    fun deleteEvent(
+        @Path("id")
+        eventId: Int
+    ): Call<Void>
 }

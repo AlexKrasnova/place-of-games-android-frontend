@@ -13,6 +13,7 @@ data class Event(
     val maxNumberOfParticipants: Int,
     val numberOfParticipants: Int,
     val description: String,
+    val isCurrentUserOwner: Boolean,
     val isCurrentUserEnrolled: Boolean,
     val participants: List<Participant>?
 )
