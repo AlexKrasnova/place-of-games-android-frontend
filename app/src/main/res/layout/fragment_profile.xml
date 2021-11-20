@@ -35,6 +35,18 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:shapeAppearance="@style/circleImageView" />
 
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/btn_more_profile"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="16dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:src="@drawable/ic_more_vert"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
                     <TextView
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
@@ -99,5 +111,6 @@
             android:id="@+id/vp_profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

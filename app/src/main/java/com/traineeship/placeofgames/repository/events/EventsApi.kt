@@ -1,6 +1,7 @@
 package com.traineeship.placeofgames.repository.events
 
 import com.traineeship.placeofgames.data.event.Event
+import com.traineeship.placeofgames.data.event.NewEvent
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -31,5 +32,17 @@ interface EventsApi {
     fun deleteParticipant(
         @Path("id")
         eventId: Int,
+    ): Call<Void>
+
+    @DELETE("api/v1/events/{id}")
+    fun deleteEvent(
+        @Path("id")
+        eventId: Int
+    ): Call<Void>
+
+    @POST("api/v1/events")
+    fun createEvent(
+        @Body
+        event: NewEvent
     ): Call<Void>
 }

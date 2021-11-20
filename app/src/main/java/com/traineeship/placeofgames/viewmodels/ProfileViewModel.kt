@@ -4,9 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.traineeship.placeofgames.data.event.Place
 import com.traineeship.placeofgames.data.user.User
-import com.traineeship.placeofgames.repository.places.PlacesService
 import com.traineeship.placeofgames.repository.user.UserService
 import com.traineeship.placeofgames.utils.TokenUtil
 
@@ -23,7 +21,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         return user
     }
 
-    fun loadUser(){
+    private fun loadUser(){
         profileApiService.getUser {
             it?.let { user.value = it }
         }

@@ -1,7 +1,8 @@
 package com.traineeship.placeofgames.repository.places
 
 import android.util.Log
-import com.traineeship.placeofgames.data.event.Place
+import com.traineeship.placeofgames.data.place.FreeTime
+import com.traineeship.placeofgames.data.place.Place
 import com.traineeship.placeofgames.repository.ServiceBuilder
 import retrofit2.Call
 import retrofit2.Callback
@@ -47,6 +48,28 @@ class PlacesService(token: String) {
                 }
 
                 override fun onFailure(call: Call<Place>, t: Throwable) {
+                    onResult(null)
+                    Log.d(TAG, "onFailure: ${t.message}")
+                }
+
+            }
+        )
+    }
+
+    fun getFreeTime(placeId: Int, date: String, onResult: (MutableList<FreeTime>?) -> Unit) {
+        retrofit.getFreeTime(placeId, date).enqueue(
+            object : Callback<MutableList<FreeTime>> {
+                override fun onResponse(
+                    call: Call<MutableList<FreeTime>>,
+                    response: Response<MutableList<FreeTime>>
+                ) {
+                    Log.d(TAG, "onResponse: ok")
+                    val freeTime = response.body()
+                    Log.d(TAG, freeTime.toString())
+                    onResult(freeTime)
+                }
+
+                override fun onFailure(call: Call<MutableList<FreeTime>>, t: Throwable) {
                     onResult(null)
                     Log.d(TAG, "onFailure: ${t.message}")
                 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -15,11 +16,18 @@ import com.traineeship.placeofgames.data.event.Event
 import com.traineeship.placeofgames.view.profile.ProfileFragmentDirections
 import com.traineeship.placeofgames.viewmodels.EventsViewModel
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+
+import com.traineeship.placeofgames.utils.SwipeToDeleteCallback
+
 
 class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var fabCreateEvent: FloatingActionButton
+
     private val eventsViewModel: EventsViewModel by viewModels()
     private var type: String = Constants.TYPE_STANDARD
 
@@ -41,8 +49,16 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
 
         observeEvents()
 
+        if (type == Constants.TYPE_OWNED_EVENTS) {
+            enableSwipeToDeleteAndUndo()
+        }
+
         swipeRefresh.setOnRefreshListener {
             loadTypedEvents()
+        }
+
+        fabCreateEvent.setOnClickListener {
+            findNavController().navigate(R.id.createEventFragment)
         }
 
         eventsViewModel.getUpdatedEvent().observe(viewLifecycleOwner, { event ->
@@ -86,9 +102,35 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
 
     }
 
+    private fun enableSwipeToDeleteAndUndo() {
+        val swipeToDeleteCallback: SwipeToDeleteCallback = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, i: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                val adapter = recyclerView.adapter as EventsAdapter
+                val event = adapter.getData()[position]
+
+                adapter.removeItem(position)
+
+                MaterialAlertDialogBuilder(requireContext()).
+                    setTitle("Удалить мероприятие?")
+                    .setMessage("В этом мероприятии находится ${event.numberOfParticipants} человек" )
+                    .setPositiveButton("Да") { _, _ ->
+                        eventsViewModel.deleteEvent(event.id)
+                    }
+                    .setNegativeButton("Нет") { _, _ ->
+                        adapter.restoreItem(event, position)
+                    }
+                    .show()
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+    }
+
     private fun initViews(view: View) {
         recyclerView = view.findViewById(R.id.rv_places)
         swipeRefresh = view.findViewById(R.id.swipe_refresh_places)
+        fabCreateEvent = view.findViewById(R.id.fab_create_event)
     }
 
     override fun onClickSignUp(v: View, event: Event) {

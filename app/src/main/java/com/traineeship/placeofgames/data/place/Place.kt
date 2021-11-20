@@ -1,7 +1,4 @@
-package com.traineeship.placeofgames.data.event
-
-import android.os.Parcel
-import android.os.Parcelable
+package com.traineeship.placeofgames.data.place
 
 data class Place(
     val id: Int,

@@ -11,11 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.traineeship.placeofgames.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.traineeship.placeofgames.R
 import com.traineeship.placeofgames.data.event.Event
 import com.traineeship.placeofgames.viewmodels.EventDescViewModel
+import com.traineeship.placeofgames.viewmodels.ProfileViewModel
 
 class EventDescFragment : Fragment() {
 
@@ -35,6 +36,7 @@ class EventDescFragment : Fragment() {
     private lateinit var btnBack: AppCompatImageButton
     private lateinit var btnParticipants: AppCompatImageButton
     private lateinit var btnEventSignUp: MaterialButton
+    private lateinit var btnDeleteEvent: MaterialButton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +46,11 @@ class EventDescFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_event_desc, container, false)
 
         initViews(view)
+
+        btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         eventViewModel.getEvent(eventId).observe(viewLifecycleOwner, { event ->
             setEventToViews(event)
             btnParticipants.setOnClickListener {
@@ -56,12 +63,6 @@ class EventDescFragment : Fragment() {
                     .show()
             }
         })
-
-        btnBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
-
 
         return view
     }
@@ -95,6 +96,19 @@ class EventDescFragment : Fragment() {
         tvWhere.text = "Место: ${event.place?.name}"
         tvDuration.text = "Продолжительность: ${event.duration} мин"
         tvTime.text = "Время: ${time}, ${date}"
+
+        if (event.isCurrentUserOwner) {
+            btnDeleteEvent.visibility = View.VISIBLE
+            btnDeleteEvent.setOnClickListener {
+                MaterialAlertDialogBuilder(requireContext()).setTitle("Удалить мероприятие?")
+                    .setMessage("В этом мероприятии находится ${event.numberOfParticipants} человек")
+                    .setPositiveButton("Да") { _, _ ->
+                        eventViewModel.deleteEvent(event.id)
+                    }
+                    .setNegativeButton("Нет") { _, _ -> }
+                    .show()
+            }
+        }
     }
 
     private fun initViews(view: View) {
@@ -109,5 +123,6 @@ class EventDescFragment : Fragment() {
         btnBack = view.findViewById(R.id.btn_back)
         btnParticipants = view.findViewById(R.id.btn_participants)
         btnEventSignUp = view.findViewById(R.id.btn_event_sign_up)
+        btnDeleteEvent = view.findViewById(R.id.btn_delete_event)
     }
 }

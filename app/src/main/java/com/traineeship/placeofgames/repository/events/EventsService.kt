@@ -2,6 +2,7 @@ package com.traineeship.placeofgames.repository.events
 
 import android.util.Log
 import com.traineeship.placeofgames.data.event.Event
+import com.traineeship.placeofgames.data.event.NewEvent
 import com.traineeship.placeofgames.repository.ServiceBuilder
 import retrofit2.Call
 import retrofit2.Callback
@@ -140,5 +141,33 @@ class EventsService(token: String) {
         )
     }
 
+    fun deleteEvent(eventId: Int) {
+        retrofit.deleteEvent(eventId).enqueue(
+            object: Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    Log.d(TAG, "onResponse: ok")
+                }
 
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    //todo
+                }
+            }
+        )
+    }
+
+    fun createEvent(newEvent: NewEvent, onResult: (Boolean) -> Unit){
+        retrofit.createEvent(newEvent).enqueue(
+            object : Callback<Void>{
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    Log.d(TAG, "onResponse: event created")
+                    onResult(true)
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    onResult(false)
+                }
+
+            }
+        )
+    }
 }

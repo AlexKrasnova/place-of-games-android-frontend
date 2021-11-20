@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.traineeship.placeofgames.R
@@ -61,8 +62,18 @@ class EventsAdapter(
         }
     }
 
-    override fun getItemCount(): Int {
-        return data.size
+    override fun getItemCount() = data.size
+
+    fun getData() = data
+
+    fun removeItem(position: Int){
+        data.removeAt(position);
+        notifyItemRemoved(position);
+    }
+
+    fun restoreItem(event: Event, position: Int){
+        data.add(position, event)
+        notifyItemInserted(position)
     }
 
     fun updateEvent(updatedEvent: Event) {
