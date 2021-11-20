@@ -9,7 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.traineeship.placeofgames.R
-import com.traineeship.placeofgames.data.event.Place
+import com.traineeship.placeofgames.data.place.Place
 
 class PlacesAdapter(
     private val data: MutableList<Place>,

@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
                 Handler(Looper.getMainLooper()).postDelayed(Runnable { isPressedBack = false }, 2000)
             }
+
         } else {
             navController.navigateUp()
         }

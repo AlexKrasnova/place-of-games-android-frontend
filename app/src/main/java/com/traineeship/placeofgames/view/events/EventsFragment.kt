@@ -17,6 +17,7 @@ import com.traineeship.placeofgames.view.profile.ProfileFragmentDirections
 import com.traineeship.placeofgames.viewmodels.EventsViewModel
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 import com.traineeship.placeofgames.utils.SwipeToDeleteCallback
 
@@ -25,6 +26,8 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var fabCreateEvent: FloatingActionButton
+
     private val eventsViewModel: EventsViewModel by viewModels()
     private var type: String = Constants.TYPE_STANDARD
 
@@ -52,6 +55,10 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
 
         swipeRefresh.setOnRefreshListener {
             loadTypedEvents()
+        }
+
+        fabCreateEvent.setOnClickListener {
+            findNavController().navigate(R.id.createEventFragment)
         }
 
         eventsViewModel.getUpdatedEvent().observe(viewLifecycleOwner, { event ->
@@ -123,6 +130,7 @@ class EventsFragment : Fragment(), EventsAdapter.EventClickListener {
     private fun initViews(view: View) {
         recyclerView = view.findViewById(R.id.rv_places)
         swipeRefresh = view.findViewById(R.id.swipe_refresh_places)
+        fabCreateEvent = view.findViewById(R.id.fab_create_event)
     }
 
     override fun onClickSignUp(v: View, event: Event) {

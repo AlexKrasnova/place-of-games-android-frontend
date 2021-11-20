@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.traineeship.placeofgames.data.event.Place
+import com.traineeship.placeofgames.data.place.Place
 import com.traineeship.placeofgames.repository.places.PlacesService
 import com.traineeship.placeofgames.utils.TokenUtil
 

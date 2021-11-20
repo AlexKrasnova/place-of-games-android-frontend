@@ -1,4 +1,4 @@
-package com.traineeship.placeofgames.data.event
+package com.traineeship.placeofgames.data.place
 
 import android.os.Parcel
 import android.os.Parcelable
